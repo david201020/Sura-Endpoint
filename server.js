@@ -72,6 +72,7 @@ cuentas.forEach(cuenta => {
 });
 
 app.get('/historico', (req, res) => {
+    console.log('Parámetros recibidos:', req.query);
     const contactKey = req.query.contactKey;
     const rut = req.query.rut;
     const fechaInicio = req.query.startDate;
