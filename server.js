@@ -18,9 +18,9 @@ const asuntos = [
 ];
 
 const cuentas = [
-    { accountId: '001We00000XRFZaIAP', contactID: 'Alejandro Walker Cerda', rutCliente: '12.345.678', dvCliente: '9', emailAddress: 'alejandro.walker@email.com', cantidad: 65 },
-    { accountId: '001We00000ZFPkEIAX', contactID: 'María González López', rutCliente: '9.876.543', dvCliente: '2', emailAddress: 'maria.gonzalez@email.com', cantidad: 45 },
-    { accountId: '001We00000ZFPLaIAP', contactID: 'Carlos Pérez Soto', rutCliente: '15.432.876', dvCliente: '5', emailAddress: 'carlos.perez@email.com', cantidad: 30 }
+    { accountId: '001We00000XRFZaIAP', ContactKey: '001We00000XRFZaIAP', ContactID: 'Alejandro Walker Cerda', rut: '0764123816', EmailAddress: 'alejandro.walker@email.com', cantidad: 65 },
+    { accountId: '001We00000ZFPkEIAX', ContactKey: '001We00000ZFPkEIAX', ContactID: 'María González López', rut: '0987654321', EmailAddress: 'maria.gonzalez@email.com', cantidad: 45 },
+    { accountId: '001We00000ZFPLaIAP', ContactKey: '001We00000ZFPLaIAP', ContactID: 'Carlos Pérez Soto', rut: '0764123816', EmailAddress: 'carlos.perez@email.com', cantidad: 30 }
 ];
 
 const registros = [];
@@ -30,49 +30,47 @@ cuentas.forEach(cuenta => {
         const mes = meses[i % meses.length];
         const dia = String((i % 28) + 1).padStart(2, '0');
         const sendDate = `${mes}-${dia}`;
-        const abierto = i % 2 === 0 ? 'SI' : 'NO';
-        const rebote = i % 5 === 0 ? 'SI' : 'NO';
-        const hizoClick = i % 3 === 0 ? 'SI' : 'NO';
-        const desuscrito = i % 15 === 0 ? 'SI' : 'NO';
+        const abierto = i % 2 === 0;
+        const rebote = i % 5 === 0;
+        const hizoClick = i % 3 === 0;
+        const desuscrito = i % 15 === 0;
 
         registros.push({
             accountId: cuenta.accountId,
-            jobId: `JOB_${cuenta.accountId.slice(-4)}_${String(i).padStart(3, '0')}`,
-            rutCliente: cuenta.rutCliente,
-            dvCliente: cuenta.dvCliente,
-            contactID: cuenta.contactID,
-            abierto: abierto,
-            openDate: abierto === 'SI' ? sendDate : null,
-            cantidadApertura: abierto === 'SI' ? (i % 4) + 1 : 0,
-            fechaConcatenadoOpen: abierto === 'SI' ? sendDate : null,
-            rebote: rebote,
-            bounceDate: rebote === 'SI' ? sendDate : null,
-            bounceCategory: rebote === 'SI' ? (i % 2 === 0 ? 'Soft' : 'Hard') : null,
-            emailName: `${asuntos[i % asuntos.length]} ${i}`,
-            asunto: asuntos[i % asuntos.length],
-            emailAddress: cuenta.emailAddress,
-            sendDate: sendDate,
-            fromName: 'SURA Investments',
-            fromEmail: 'no-reply@sura.cl',
-            listNameSend: listas[i % listas.length],
-            desuscrito: desuscrito,
-            unsubscribeDate: desuscrito === 'SI' ? sendDate : null,
-            hizoClick: hizoClick,
-            clickDate: hizoClick === 'SI' ? sendDate : null,
-            cantidadClick: hizoClick === 'SI' ? (i % 3) + 1 : 0,
-            journeyName: journeys[i % journeys.length],
-            versionNumber: String((i % 3) + 1),
-            origen: i % 2 === 0 ? 'Masivo' : 'Transaccional',
-            smtpBounceReason: rebote === 'SI' ? 'Mailbox full' : null,
-            bounceType: rebote === 'SI' ? (i % 2 === 0 ? 'Soft' : 'Hard') : null,
-            smtpCode: rebote === 'SI' ? '452' : null,
-            smtpMessage: rebote === 'SI' ? 'Insufficient storage' : null
+            ContactKey: cuenta.ContactKey,
+            ContactID: cuenta.ContactID,
+            JobID: `JOB_${cuenta.accountId.slice(-4)}_${String(i).padStart(3, '0')}`,
+            EmailAddress: cuenta.EmailAddress,
+            EmailName: `${asuntos[i % asuntos.length]} ${i}`,
+            Asunto: asuntos[i % asuntos.length],
+            SendDate: sendDate,
+            SendDateUTC: `${sendDate}T12:00:00.000Z`,
+            SendSource: i % 2 === 0 ? 'Journey Builder' : 'Email Studio',
+            FromName: 'SURA Investments',
+            FromEmail: i % 2 === 0 ? 'noreply.cl@comunicacion.surainvestments.com' : 'comunicaciones.cl@comunicacion.surainvestments.com',
+            JourneyName: i % 2 === 0 ? journeys[i % journeys.length] : null,
+            VersionNumber: i % 2 === 0 ? (i % 3) + 1 : null,
+            BatchID: String(i * 10),
+            ListID_Send: i % 2 === 0 ? String(3000 + i) : null,
+            ListName_Send: listas[i % listas.length],
+            ListSubscriberStatus: desuscrito ? 'unsubscribed' : 'active',
+            OpenDate: abierto ? `${sendDate}T13:00:00.000Z` : null,
+            CantidadApertura: abierto ? (i % 4) + 1 : 0,
+            FechaConcatenadoOpen: abierto ? `${sendDate} 1:00PM` : null,
+            ClickDate: hizoClick ? `${sendDate}T14:00:00.000Z` : null,
+            CantidadClick: hizoClick ? (i % 3) + 1 : 0,
+            BounceDate: rebote ? `${sendDate}T12:30:00.000Z` : null,
+            BounceCategory: rebote ? (i % 2 === 0 ? 'Soft' : 'Hard') : null,
+            BounceType: rebote ? (i % 2 === 0 ? 'Soft' : 'Hard') : null,
+            SMTPBounceReason: rebote ? 'Mailbox full' : null,
+            SMTPCode: rebote ? '452' : null,
+            SMTPMessage: rebote ? 'Insufficient storage' : null,
+            UnsubscribeDate: desuscrito ? sendDate : null
         });
     }
 });
 
 app.get('/historico', (req, res) => {
-    console.log('Parámetros recibidos:', req.query);
     const contactKey = req.query.contactKey;
     const rut = req.query.rut;
     const fechaInicio = req.query.startDate;
@@ -80,11 +78,16 @@ app.get('/historico', (req, res) => {
     const paginaActual = parseInt(req.query.page) || 1;
     const registrosPorPagina = parseInt(req.query.pageSize) || 20;
 
-    let resultados = registros.filter(r => r.accountId === contactKey);
+    console.log('Parámetros recibidos:', req.query);
+    console.log('IDs en registros:', [...new Set(registros.map(r => r.accountId))]);
+
+    let resultados = registros.filter(r => 
+        r.accountId === contactKey || r.accountId === rut
+    );
 
     if (fechaInicio && fechaFin) {
         resultados = resultados.filter(r =>
-            r.sendDate >= fechaInicio && r.sendDate <= fechaFin
+            r.SendDate >= fechaInicio && r.SendDate <= fechaFin
         );
     }
 
@@ -94,15 +97,17 @@ app.get('/historico', (req, res) => {
     const totalPaginas = Math.ceil(totalRegistros / registrosPorPagina) || 1;
     const inicio = (paginaActual - 1) * registrosPorPagina;
     const fin = inicio + registrosPorPagina;
+    const pagina = registrosSinId.slice(inicio, fin);
 
     res.json({
         response: true,
         data: {
             total: totalRegistros,
             totalPages: totalPaginas,
-            totalInPage: registrosSinId.slice(inicio, fin).length,
-            results: registrosSinId.slice(inicio, fin)
+            totalInPage: pagina.length,
+            results: pagina
         }
     });
 });
+
 app.listen(3000, () => console.log('Servidor corriendo en puerto 3000'));
