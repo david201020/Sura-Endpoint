@@ -72,13 +72,14 @@ cuentas.forEach(cuenta => {
 });
 
 app.get('/historico', (req, res) => {
-    const accountId = req.query.accountId;
-    const fechaInicio = req.query.fechaInicio;
-    const fechaFin = req.query.fechaFin;
+    const contactKey = req.query.contactKey;
+    const rut = req.query.rut;
+    const fechaInicio = req.query.startDate;
+    const fechaFin = req.query.endDate;
     const paginaActual = parseInt(req.query.page) || 1;
-    const registrosPorPagina = 20;
+    const registrosPorPagina = parseInt(req.query.pageSize) || 20;
 
-    let resultados = registros.filter(r => r.accountId === accountId);
+    let resultados = registros.filter(r => r.accountId === contactKey);
 
     if (fechaInicio && fechaFin) {
         resultados = resultados.filter(r =>
@@ -94,10 +95,13 @@ app.get('/historico', (req, res) => {
     const fin = inicio + registrosPorPagina;
 
     res.json({
-        totalRegistros: totalRegistros,
-        totalPaginas: totalPaginas,
-        registros: registrosSinId.slice(inicio, fin)
+        response: true,
+        data: {
+            total: totalRegistros,
+            totalPages: totalPaginas,
+            totalInPage: registrosSinId.slice(inicio, fin).length,
+            results: registrosSinId.slice(inicio, fin)
+        }
     });
 });
-
 app.listen(3000, () => console.log('Servidor corriendo en puerto 3000'));
