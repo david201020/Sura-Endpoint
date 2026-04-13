@@ -18,11 +18,11 @@ const asuntos = [
 ];
 
 const cuentas = [
-    { accountId: '001We00000fQ3rsIAC', ContactKey: '001We00000fQ3rsIAC', ContactID: 'Jhon Barrie Mackenzie Haynes', rut: '5193123-8', EmailAddress: 'jhon.mackenzie@email.com', cantidad: 65 },
-    { accountId: '001We00000fQ3sFIAS', ContactKey: '001We00000fQ3sFIAS', ContactID: 'Eduardo Gaston Uribe Tapia', rut: '0054256205', EmailAddress: 'eduardo.uribe@email.com', cantidad: 45 },
-    { accountId: '001We00000fR2hGIAS', ContactKey: '001We00000fR2hGIAS', ContactID: 'Lilian Del Carmen Urrutia Romero', rut: '0061115129', EmailAddress: 'lilian.urrutia@email.com', cantidad: 21 },
-    { accountId: '001We00000fR2htIAC', ContactKey: '001We00000fR2htIAC', ContactID: 'Adriana Isabel Guerra Inostroza', rut: '0032921418', EmailAddress: 'adriana.guerra@email.com', cantidad: 20 },
-    { accountId: '001We00000fR2hxIAC', ContactKey: '001We00000fR2hxIAC', ContactID: 'Blanca Anelida Parada Flores', rut: '0044300400', EmailAddress: 'blanca.parada@email.com', cantidad: 5 },
+    { accountId: '001We00000fQ3rsIAC', ContactKey: '5193123-8', ContactID: 'Jhon Barrie Mackenzie Haynes', EmailAddress: 'jhon.mackenzie@email.com', cantidad: 65 },
+    { accountId: '001We00000fQ3sFIAS', ContactKey: '0054256205', ContactID: 'Eduardo Gaston Uribe Tapia', EmailAddress: 'eduardo.uribe@email.com', cantidad: 45 },
+    { accountId: '001We00000fR2hGIAS', ContactKey: '0061115129', ContactID: 'Lilian Del Carmen Urrutia Romero', EmailAddress: 'lilian.urrutia@email.com', cantidad: 21 },
+    { accountId: '001We00000fR2htIAC', ContactKey: '0032921418', ContactID: 'Adriana Isabel Guerra Inostroza', EmailAddress: 'adriana.guerra@email.com', cantidad: 20 },
+    { accountId: '001We00000fR2hxIAC', ContactKey: '0044300400', ContactID: 'Blanca Anelida Parada Flores', EmailAddress: 'blanca.parada@email.com', cantidad: 5 },
 ];
 
 const registros = [];
