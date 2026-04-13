@@ -18,9 +18,11 @@ const asuntos = [
 ];
 
 const cuentas = [
-    { accountId: '001We00000XRFZaIAP', ContactKey: '001We00000XRFZaIAP', ContactID: 'Alejandro Walker Cerda', rut: '0764123816', EmailAddress: 'alejandro.walker@email.com', cantidad: 65 },
-    { accountId: '001We00000ZFPkEIAX', ContactKey: '001We00000ZFPkEIAX', ContactID: 'María González López', rut: '0987654321', EmailAddress: 'maria.gonzalez@email.com', cantidad: 45 },
-    { accountId: '001We00000ZFPLaIAP', ContactKey: '001We00000ZFPLaIAP', ContactID: 'Carlos Pérez Soto', rut: '0764123816', EmailAddress: 'carlos.perez@email.com', cantidad: 30 }
+    { accountId: '001We00000fQ3rsIAC', ContactKey: '001We00000fQ3rsIAC', ContactID: 'Jhon Barrie Mackenzie Haynes', rut: '5193123-8', EmailAddress: 'jhon.mackenzie@email.com', cantidad: 65 },
+    { accountId: '001We00000fQ3sFIAS', ContactKey: '001We00000fQ3sFIAS', ContactID: 'Eduardo Gaston Uribe Tapia', rut: '0054256205', EmailAddress: 'eduardo.uribe@email.com', cantidad: 45 },
+    { accountId: '001We00000fR2hGIAS', ContactKey: '001We00000fR2hGIAS', ContactID: 'Lilian Del Carmen Urrutia Romero', rut: '0061115129', EmailAddress: 'lilian.urrutia@email.com', cantidad: 21 },
+    { accountId: '001We00000fR2htIAC', ContactKey: '001We00000fR2htIAC', ContactID: 'Adriana Isabel Guerra Inostroza', rut: '0032921418', EmailAddress: 'adriana.guerra@email.com', cantidad: 20 },
+    { accountId: '001We00000fR2hxIAC', ContactKey: '001We00000fR2hxIAC', ContactID: 'Blanca Anelida Parada Flores', rut: '0044300400', EmailAddress: 'blanca.parada@email.com', cantidad: 5 },
 ];
 
 const registros = [];
@@ -72,18 +74,14 @@ cuentas.forEach(cuenta => {
 
 app.get('/historico', (req, res) => {
     const contactKey = req.query.contactKey;
-    const rut = req.query.rut;
     const fechaInicio = req.query.startDate;
     const fechaFin = req.query.endDate;
     const paginaActual = parseInt(req.query.page) || 1;
     const registrosPorPagina = parseInt(req.query.pageSize) || 20;
 
     console.log('Parámetros recibidos:', req.query);
-    console.log('IDs en registros:', [...new Set(registros.map(r => r.accountId))]);
 
-    let resultados = registros.filter(r => 
-        r.accountId === contactKey || r.accountId === rut
-    );
+    let resultados = registros.filter(r => r.accountId === contactKey);
 
     if (fechaInicio && fechaFin) {
         resultados = resultados.filter(r =>
