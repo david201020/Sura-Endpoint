@@ -23,6 +23,7 @@ const cuentas = [
     { accountId: '001We00000fR2hGIAS', ContactKey: '0061115129', ContactID: 'Lilian Del Carmen Urrutia Romero', EmailAddress: 'lilian.urrutia@email.com', cantidad: 21 },
     { accountId: '001We00000fR2htIAC', ContactKey: '0032921418', ContactID: 'Adriana Isabel Guerra Inostroza', EmailAddress: 'adriana.guerra@email.com', cantidad: 20 },
     { accountId: '001We00000fR2hxIAC', ContactKey: '0044300400', ContactID: 'Blanca Anelida Parada Flores', EmailAddress: 'blanca.parada@email.com', cantidad: 5 },
+    { accountId: '001We00000XQakaIAD', ContactKey: '10931888-4', ContactID: 'Cliente SURA', EmailAddress: 'cliente.sura@email.com', cantidad: 30 },
 ];
 
 const registros = [];
