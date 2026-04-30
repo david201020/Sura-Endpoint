@@ -59,7 +59,14 @@ cuentas.forEach(cuenta => {
             ListSubscriberStatus: desuscrito ? 'unsubscribed' : 'active',
             OpenDate: abierto ? `${sendDate}T13:00:00.000Z` : null,
             CantidadApertura: abierto ? (i % 4) + 1 : 0,
-            FechaConcatenadoOpen: abierto ? `${sendDate} 1:00PM` : null,
+            FechaConcatenadoOpen: abierto ? (() => {
+                const fechas = [];
+                for (let j = 0; j < 10; j++) {
+                    const hora = `${String(j + 8).padStart(2, '0')}:${String(j * 5).padStart(2, '0')}AM`;
+                    fechas.push(`${sendDate} ${hora}`);
+                }
+                return fechas.join(', ');
+            })() : null,
             ClickDate: hizoClick ? `${sendDate}T14:00:00.000Z` : null,
             CantidadClick: hizoClick ? (i % 3) + 1 : 0,
             BounceDate: rebote ? `${sendDate}T12:30:00.000Z` : null,
